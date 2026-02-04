@@ -49,22 +49,17 @@
     scrollLeft = slider.scrollLeft;
   });
 
-  slider.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', () => {
     isDown = false;
     slider.classList.remove('active');
   });
 
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-  });
-
-  slider.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
 
-    const walk = (e.pageX - startX) * 2; // force scroll
-    slider.scrollLeft = scrollLeft - walk;
+    const walk = startX - e.pageX; // positive when dragging left
+    slider.scrollLeft = scrollLeft + walk;
   });
 </script>
 
